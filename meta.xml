@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <id>antoinekm.helloworld</id>
+    <version>1.0.0</version>
+    <name>Hello World Test</name>
+    <description>Test mod to verify WoT mod loading works</description>
+</root>

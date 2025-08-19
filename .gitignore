@@ -1,0 +1,19 @@
+# Build artifacts
+build/
+*.wotmod
+*.pyc
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db

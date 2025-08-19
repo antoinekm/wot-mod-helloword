@@ -1,0 +1,46 @@
+name: Build WoT Mod
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  release:
+    types: [ published ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python 2.7
+      uses: actions/setup-python@v4
+      with:
+        python-version: '2.7'
+    
+    - name: Install 7-Zip
+      run: |
+        choco install 7zip -y
+        
+    - name: Build mod
+      run: |
+        python build.py
+        
+    - name: Upload mod artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: wot-helloworld-mod
+        path: antoinekm.helloworld.wotmod
+        
+    - name: Upload to release
+      if: github.event_name == 'release'
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: antoinekm.helloworld.wotmod
+        asset_name: antoinekm.helloworld.wotmod
+        asset_content_type: application/zip
